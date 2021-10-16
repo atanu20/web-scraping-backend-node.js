@@ -14,11 +14,13 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("hii")
 })
+
 app.post("/getamazon", async (req, res) => {
     const search = req.body.search
     url = `https://www.amazon.in/s?k=${search}`;
 
-    const ary = []
+    try{
+        const ary = []
     request(url, (error, response, html) => {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
@@ -67,7 +69,15 @@ app.post("/getamazon", async (req, res) => {
             // console.log(ary);
             res.send(ary);
         }
+        else{
+            res.send(error);
+        }
     });
+    }
+    catch(err)
+    {
+        res.send("error");
+    }
 
 })
 
