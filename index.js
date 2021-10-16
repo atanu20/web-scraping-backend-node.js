@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 
 app.post("/getamazon", async (req, res) => {
     const search = req.body.search
-    url = `https://www.amazon.in/s?k=${search}`;
+    url = `https://www.amazon.in/US/s?k=${search}`;
 
     try{
         const ary = []
